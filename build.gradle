@@ -1,0 +1,45 @@
+plugins {
+    // Apply the application plugin to add support for building a CLI application in Java.
+    id 'application'
+    id "com.diffplug.spotless" version "6.11.0"
+}
+
+repositories {
+    // Use Maven Central for resolving dependencies.
+    mavenCentral()
+}
+
+dependencies {
+    // Use JUnit Jupiter for testing.
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.1'
+
+    // This dependency is used by the application.
+    // implementation 'com.google.guava:guava:31.1-jre'
+    
+	// https://mvnrepository.com/artifact/com.github.lgooddatepicker/LGoodDatePicker
+	implementation group: 'com.github.lgooddatepicker', name: 'LGoodDatePicker', version: '11.2.1'
+    
+    // https://mvnrepository.com/artifact/io.github.threeten-jaxb/threeten-jaxb-core
+	implementation group: 'io.github.threeten-jaxb', name: 'threeten-jaxb-core', version: '1.2'
+    
+    // https://mvnrepository.com/artifact/org.apache.commons/commons-text
+	implementation group: 'org.apache.commons', name: 'commons-text', version: '1.10.0'
+}
+
+application {
+    // Define the main class for the application.
+    mainClass = 'io.github.andreaszks.ergasales.app.ApplicationFrame'
+}
+
+spotless {
+  java {
+  target 'src/**/*.java'
+    //googleJavaFormat('1.7').aosp()
+    googleJavaFormat('1.7')
+    }
+}
+
+tasks.named('test') {
+    // Use JUnit Platform for unit tests.
+    useJUnitPlatform()
+}
