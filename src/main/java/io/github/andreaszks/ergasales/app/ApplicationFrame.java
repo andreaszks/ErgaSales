@@ -76,6 +76,9 @@ public class ApplicationFrame extends JFrame {
 
   private static boolean comingFromTab;
 
+  private static ApplicationFrame frame;
+  private static String APP_TITLE = "ErgaSales";
+
   /** Launch the application. */
   public static void main(String[] args) {
     EventQueue.invokeLater(
@@ -85,7 +88,7 @@ public class ApplicationFrame extends JFrame {
               UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
               FileToolsSer.importRegistryFromFile();
               comingFromTab = true;
-              ApplicationFrame frame = new ApplicationFrame();
+              frame = new ApplicationFrame();
               frame.setVisible(true);
             } catch (Exception e) {
               e.printStackTrace();
@@ -99,7 +102,7 @@ public class ApplicationFrame extends JFrame {
   public ApplicationFrame() {
 
     setMinimumSize(new Dimension(1020, 600));
-    setTitle("ErgaSales");
+    setTitle(APP_TITLE);
 
     setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
     setBounds(100, 100, 529, 320);
@@ -234,6 +237,7 @@ public class ApplicationFrame extends JFrame {
               panelTabs.setSelectedIndex(1);
               panelTabs.setSelectedIndex(0);
             }
+            ApplicationFrame.checkUnsavedChanges();
           }
         });
 
@@ -258,6 +262,7 @@ public class ApplicationFrame extends JFrame {
               panelTabs.setSelectedIndex(1);
               panelTabs.setSelectedIndex(0);
             }
+            ApplicationFrame.checkUnsavedChanges();
           }
         });
 
@@ -267,6 +272,7 @@ public class ApplicationFrame extends JFrame {
             if (FileToolsSer.registryHasUnsavedChanges()) {
               FileToolsSer.exportRegistryToFile();
             }
+            ApplicationFrame.checkUnsavedChanges();
           }
         });
 
@@ -434,5 +440,11 @@ public class ApplicationFrame extends JFrame {
     newSalePanel.updateCustomersModel(c);
     panelTabs.setSelectedIndex(3);
     comingFromTab = true;
+  }
+
+  /** Checks for unsaved changes and puts an asterisk on frame title to indicate them. */
+  public static void checkUnsavedChanges() {
+    if (FileToolsSer.registryHasUnsavedChanges()) frame.setTitle("*" + APP_TITLE);
+    else frame.setTitle(APP_TITLE);
   }
 }

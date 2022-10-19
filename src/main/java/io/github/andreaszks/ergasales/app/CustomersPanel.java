@@ -246,6 +246,7 @@ public class CustomersPanel extends JPanel {
                       + CustomerRegistry.MAX_NOTES_LENGTH;
               SwingTools.showErrorDialog(errorMessage);
             }
+            ApplicationFrame.checkUnsavedChanges();
           }
         });
 
@@ -336,6 +337,7 @@ public class CustomersPanel extends JPanel {
                 }
               }
             }
+            ApplicationFrame.checkUnsavedChanges();
           }
         });
 
@@ -361,6 +363,7 @@ public class CustomersPanel extends JPanel {
                 JOptionPane.showMessageDialog(null, "Customer deleted successfully!");
               }
             }
+            ApplicationFrame.checkUnsavedChanges();
           }
         });
   }

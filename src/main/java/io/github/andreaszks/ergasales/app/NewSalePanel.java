@@ -451,6 +451,7 @@ public class NewSalePanel extends JPanel {
                       + SaleRegistry.MAX_NOTES_LENGTH
                       + ")");
             }
+            ApplicationFrame.checkUnsavedChanges();
           }
         });
   }

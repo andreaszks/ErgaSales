@@ -226,6 +226,7 @@ public class ProductsPanel extends JPanel {
                       + ProductRegistry.MAX_PRODUCT_TYPE_LENGTH;
               SwingTools.showErrorDialog(message);
             }
+            ApplicationFrame.checkUnsavedChanges();
           }
         });
 
@@ -289,6 +290,7 @@ public class ProductsPanel extends JPanel {
                 }
               }
             }
+            ApplicationFrame.checkUnsavedChanges();
           }
         });
 
@@ -314,6 +316,7 @@ public class ProductsPanel extends JPanel {
                 JOptionPane.showMessageDialog(null, "Product deleted successfully!");
               }
             }
+            ApplicationFrame.checkUnsavedChanges();
           }
         });
   }

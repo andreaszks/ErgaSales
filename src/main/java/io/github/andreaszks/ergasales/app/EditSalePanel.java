@@ -358,6 +358,7 @@ public class EditSalePanel extends JPanel {
               JOptionPane.showMessageDialog(null, "Sale updated successfully!");
               ApplicationFrame.showSalesCard();
             }
+            ApplicationFrame.checkUnsavedChanges();
           }
         });
   }

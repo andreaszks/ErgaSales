@@ -284,6 +284,7 @@ public class SalesPanel extends JPanel {
 
               ApplicationFrame.showEditSaleCard(saleToEdit);
             }
+            ApplicationFrame.checkUnsavedChanges();
           }
         });
 
@@ -308,6 +309,7 @@ public class SalesPanel extends JPanel {
                 ApplicationFrame.showSalesCard();
               }
             }
+            ApplicationFrame.checkUnsavedChanges();
           }
         });
   }
