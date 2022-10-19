@@ -78,11 +78,12 @@ public class Sale implements Serializable {
     return id;
   }
   /**
-   * Reset the ID of the sale or sets a new one if a sale from XML File doesn't have an ID.
+   * Sets a new ID if a sale from XML File doesn't have one. Does nothing if ID is already set.
    *
-   * @return true if sale gets a new ID, false if there are no available IDs to assign.
+   * @return true if sale gets a new ID, false if there are no available IDs or ID already set.
    */
-  public boolean resetId() {
+  public boolean setId() {
+    if (this.id != null) return false;
     String newId = IDTools.generateUniqueId();
     if (newId == null) return false;
     this.id = newId;

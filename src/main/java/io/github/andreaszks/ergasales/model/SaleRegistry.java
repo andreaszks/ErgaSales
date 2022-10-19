@@ -32,12 +32,9 @@ public class SaleRegistry implements Serializable {
    * @return a list of all sales in the Registry
    */
   public List<Sale> getSales() {
-    // Applies to  getCustomers, getProducts, getSales: Return a clone that has the original
-    // objects to prevent modification of the original list.
-    // Example: if you return the original list, one can execute remove(), add() etc without
-    // updating the required objects and fields.
-    // Scenario it solves: by removing a sale outside SaleRegistry#removeSaleById(), customer
-    // and products will not update quantities, dates etc.
+    // Return a clone of the original list. Applies to getCustomers, getProducts, getSales.
+    // Scenario it solves: deleting outside deleteXXXById() (.remove() on original list),
+    // the customer and products will not update quantities, dates etc.
     ArrayList<Sale> salesClone = new ArrayList<>();
     salesClone.addAll(sales);
     return salesClone;
@@ -46,8 +43,7 @@ public class SaleRegistry implements Serializable {
   /**
    * Creates a sale and adds it to the Registry.
    *
-   * <p>The sale is created iff the fields are in correct format and there is available ID to
-   * assign.
+   * <p>The sale is created iff the fields have correct format and there is available ID to assign.
    *
    * <p>The customer of the sale cannot be changed once the sale is added to the Registry.
    *
@@ -94,8 +90,7 @@ public class SaleRegistry implements Serializable {
   /**
    * Updates the sale to the new values.
    *
-   * <p>The sale is updated iff there is a sale with this ID and the new values are in correct
-   * format.
+   * <p>The sale is updated iff there is a sale with this ID and the new values have correct format.
    *
    * @see SaleRegistry#isSaleCorrectFormat(LocalDate, String, float, List)
    * @param id
@@ -249,8 +244,7 @@ public class SaleRegistry implements Serializable {
    * Returns a list of sales that contain the Product of specified ID.
    *
    * @param id
-   * @return the sales that contain the Product of specified ID or an empty list if no sales are
-   *     found
+   * @return the sales that contain the Product of specified ID, empty list if no sales are found
    */
   public List<Sale> getSalesByProductId(String id) {
     ArrayList<Sale> salesByProduct = new ArrayList<>();
@@ -270,8 +264,7 @@ public class SaleRegistry implements Serializable {
    * Returns a list of sales that contain the Customer of specified ID.
    *
    * @param id
-   * @return the sales that contain the Customer of specified ID or an empty list if no sales are
-   *     found
+   * @return the sales that contain the Customer of specified ID, empty list if no sales are found
    */
   public List<Sale> getSalesByCustomerId(String id) {
     ArrayList<Sale> salesByCustomer = new ArrayList<>();
@@ -383,13 +376,11 @@ public class SaleRegistry implements Serializable {
   /** Loops through sales and update Customer and Product statistics (total sales, revenue...) */
   public boolean updateStatistics() {
 
-    // The 2 FORs just in case it is called in other place other than XML import.
-    // This method would better seat in FileToolsXml class because it is called only from there
-    // at this point, but being here
-    // it provides a layer of security because methods such as Customer#setTotalSales are
-    // package private and are meant to be called
-    // only when you call a Registry method such as SaleRegistry#add, so all other necessary
-    // fields are changed simultaneously
+    // The 2 FORs just in case it is called in other place other than XML import. This method would
+    // better seat in FileToolsXml class because it is called only from there at this point, but
+    // being here it provides a layer of security because methods such as Customer#setTotalSales
+    // are package private and are meant to be called only when you call a Registry method such as
+    // SaleRegistry#add, so all other necessary fields are changed simultaneously
     for (Customer c : Registry.getInstance().getCustomerRegistry().getCustomers()) {
       c.setFirstSaleDate(null);
       c.setLastSaleDate(null);

@@ -32,12 +32,9 @@ public class ProductRegistry implements Serializable {
    * @return a list of all Products in the Registry
    */
   public List<Product> getProducts() {
-    // Applies to  getCustomers, getProducts, getSales: Return a clone that has the original
-    // objects to prevent modification of the original list.
-    // Example: if you return the original list, one can execute remove(), add() etc without
-    // updating the required objects and fields.
-    // Scenario it solves: by removing a sale outside SaleRegistry#removeSaleById(), the
-    // customer and products will not update quantities, dates etc.
+    // Return a clone of the original list. Applies to getCustomers, getProducts, getSales.
+    // Scenario it solves: deleting outside deleteXXXById() (.remove() on original list),
+    // the customer and products will not update quantities, dates etc.
     ArrayList<Product> productsClone = new ArrayList<>();
     productsClone.addAll(products);
     return productsClone;

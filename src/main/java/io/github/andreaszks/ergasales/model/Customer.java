@@ -101,8 +101,7 @@ public class Customer implements Serializable {
   /**
    * Returns the date of the first sale made by the customer.
    *
-   * @return the date of the first sale made by the customer, null if the customer hasn't made any
-   *     sale
+   * @return the date of the first sale, null if the customer hasn't made any sale
    */
   public LocalDate getFirstSaleDate() {
     return firstSaleDate;
@@ -110,8 +109,7 @@ public class Customer implements Serializable {
   /**
    * Returns the date of the last sale made by the customer.
    *
-   * @return the date of the last sale made by the customer, null if the customer hasn't made any
-   *     sale
+   * @return the date of the last sale, null if the customer hasn't made any sale
    */
   public LocalDate getLastSaleDate() {
     return lastSaleDate;

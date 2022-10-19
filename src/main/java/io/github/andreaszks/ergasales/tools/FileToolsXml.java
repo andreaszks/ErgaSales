@@ -218,7 +218,7 @@ public abstract class FileToolsXml extends FileTools {
 
       if (IDTools.isIdCorrectFormat(s.getId())) ids.add(s.getId());
       else {
-        if (!s.resetId()) {
+        if (!s.setId()) {
           SwingTools.showXmlErrorDialog(
               "Cannot create ID for a sale that is missing an ID\nPossible cause: no more available IDs");
           return false;
